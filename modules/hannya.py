@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 import codecs
+from modules.Config import Config
 
 def hasHannya(text):
     ret = False
     word = ""
-    with codecs.open('modules/hannya.txt', 'r', 'utf-8') as f:
+    conf = Config()
+    filename = conf.HANNYA_FILE
+    with codecs.open(filename, 'r', 'utf-8') as f:
         for line in f:
             line = line.rstrip()
             if text.find(line) >= 0:

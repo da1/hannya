@@ -10,7 +10,7 @@ class Config:
         self.__CONSUMER_SECRET = conf["config"]["consumer_secret"]
         self.__ACCESS_TOKEN    = conf["config"]["access_token"]
         self.__ACCESS_TOKEN_SECRET = conf["config"]["access_token_secret"]
-        self.__OUTPUT_FILE     = conf["config"]["output_file"]
+        self.__HANNYA_FILE     = conf["config"]["hannya"]
 
     @property
     def CONSUMER_KEY(self):
@@ -29,5 +29,5 @@ class Config:
         return self.__ACCESS_TOKEN_SECRET
 
     @property
-    def OUTPUT_FILE(self):
-        return self.__OUTPUT_FILE
+    def HANNYA_FILE(self):
+        return self.__HANNYA_FILE
