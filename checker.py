@@ -7,10 +7,10 @@ import random
 def pickup_hannya_tweet(word, tweets):
     count = tweets.count()
     if count == 0:
-        return "%s: %s" % word.encode("utf-8"), "None"
+        return "%s: %s" % (word.encode("utf-8"), "None")
 
     tweet = tweets[random.randint(0,count-1)]
-    return "%s: %s %s , other %s tweets" % word.encode("utf-8"), tweet['id'], tweet['text'].encode('utf-8'), count
+    return "%s: %d %s , other %d tweets" % (word.encode("utf-8"), tweet['id'], tweet['text'].encode('utf-8'), count)
 
 def print_hannya(word, db=None):
     if not db:
