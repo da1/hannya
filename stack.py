@@ -3,6 +3,8 @@ from modules import util
 from modules import hannya
 import pymongo
 
+TWEET_LIMIT = 100
+
 def get_timeline():
     api = util.get_api()
     return api.home_timeline()
@@ -32,6 +34,10 @@ if __name__ == "__main__":
     hannya_tweets = hannyaTweetFilter(timeline)
     for word, tweet in hannya_tweets:
         if usedb:
+            tweets_count = db.tweet.find({"word": word}).count()
+            if tweets_count > TWEET_LIMIT:
+                print "%s is skip" % word
+                continue
             db.tweet.save({
                 "id": tweet.id,
                 "word": word,
