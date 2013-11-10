@@ -2,17 +2,21 @@
 import pymongo
 import codecs
 from modules.Config import Config
+from modules.util import randomly_select
+
+def pickup_hannya_tweet(tweets):
+    if tweets.count() == 0:
+        return "%s: %s" % word.encode("utf-8"), "None"
+    tweet = randomly_select(tweets)
+    return "%s: %s %s , other %s tweets" % word.encode("utf-8"), tweet['id'], tweet['text'].encode('utf-8')
 
 def print_hannya(word, db=None):
     if not db:
         conn = pymongo.Connection()
         db = conn.hannya
 
-    tweet = db.tweet.find_one({"word": word})
-    if not tweet:
-        print word.encode("utf-8"), "None"
-    else:
-        print word.encode("utf-8"), tweet['id'], tweet['text'].encode('utf-8')
+    tweets = db.tweet.find({"word": word})
+    print pickup_hannya_tweet(tweets)
 
 if __name__ == "__main__":
     conn = pymongo.Connection()
