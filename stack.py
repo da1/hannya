@@ -34,10 +34,10 @@ if __name__ == "__main__":
     hannya_tweets = hannyaTweetFilter(timeline)
     for word, tweet in hannya_tweets:
         if usedb:
-            tweets_count = db.tweet.find({"word": word}).count()
-            if tweets_count > TWEET_LIMIT:
-                print "%s is skip" % word
-                continue
+            tweets = db.tweet.find({"word": word}).sort({"id": 1})
+            if tweets.count() > TWEET_LIMIT:
+                tweet_one = tweets[0]
+                db.tweet.remove(tweet_one)
             db.tweet.save({
                 "id": tweet.id,
                 "word": word,
