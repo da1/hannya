@@ -4,7 +4,7 @@ import codecs
 from modules.Config import Config
 import random
 
-def pickup_hannya_tweet(tweets):
+def pickup_hannya_tweet(word, tweets):
     if tweets.count() == 0:
         return "%s: %s" % word.encode("utf-8"), "None"
 
@@ -17,7 +17,7 @@ def print_hannya(word, db=None):
         db = conn.hannya
 
     tweets = db.tweet.find({"word": word})
-    print pickup_hannya_tweet(tweets)
+    print pickup_hannya_tweet(word, tweets)
 
 if __name__ == "__main__":
     conn = pymongo.Connection()
