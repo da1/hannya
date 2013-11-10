@@ -2,12 +2,13 @@
 import pymongo
 import codecs
 from modules.Config import Config
-from modules.util import randomly_select
+import random
 
 def pickup_hannya_tweet(tweets):
     if tweets.count() == 0:
         return "%s: %s" % word.encode("utf-8"), "None"
-    tweet = randomly_select(tweets)
+
+    tweet = tweets[random.randint(0,tweets.count()-1)]
     return "%s: %s %s , other %s tweets" % word.encode("utf-8"), tweet['id'], tweet['text'].encode('utf-8')
 
 def print_hannya(word, db=None):
