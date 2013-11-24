@@ -1,7 +1,7 @@
 #! -*- coding: utf-8 -*-
-import pymongo
 import codecs
 from modules.Config import Config
+from modules.db.hannya import Hannya
 import random
 
 def pickup_hannya_tweet(word, tweets):
@@ -14,15 +14,13 @@ def pickup_hannya_tweet(word, tweets):
 
 def print_hannya(word, db=None):
     if not db:
-        conn = pymongo.Connection()
-        db = conn.hannya
+        db = Hannya()
 
-    tweets = db.tweet.find({"word": word})
+    tweets = db.find(word)
     print pickup_hannya_tweet(word, tweets)
 
 if __name__ == "__main__":
-    conn = pymongo.Connection()
-    db = conn.hannya
+    db = Hannya()
 
     conf = Config()
     filename = conf.HANNYA_FILE

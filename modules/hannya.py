@@ -27,12 +27,3 @@ def hannyaFilter(texts):
             list.append((w, t))
     return list
 
-if __name__ == '__main__':
-    print hasHannya(u'ほげ')
-    print hasHannya(u'般若')
-    print hasHannya(u'空あり')
-    print hasHannya(u"経典")
-
-    for i in hannyaFilter([u'ほげ', u'般若', u'空あり', u"経典"]):
-        print i[0].encode("utf-8"), i[1].encode("utf-8")
-

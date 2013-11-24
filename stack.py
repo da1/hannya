@@ -1,7 +1,7 @@
 #! -*- coding: utf-8 -*-
 from modules import util
 from modules import hannya
-import pymongo
+from modules.db.hannya import Hannya
 
 TWEET_LIMIT = 100
 
@@ -27,17 +27,16 @@ def _print_(word, tweet):
 if __name__ == "__main__":
     usedb = True
     if usedb:
-        conn = pymongo.Connection()
-        db = conn.hannya
+        db = Hannya()
 
     timeline = get_timeline()
     hannya_tweets = hannyaTweetFilter(timeline)
     for word, tweet in hannya_tweets:
         if usedb:
-            tweets = db.tweet.find({"word": word}).sort("id")
+            tweets = db.find(word).sort("id")
             if tweets.count() > TWEET_LIMIT:
                 tweet_one = tweets[0]
-                db.tweet.remove(tweet_one)
+                db.remove(tweet_one)
             db.tweet.save({
                 "id": tweet.id,
                 "word": word,
@@ -46,4 +45,5 @@ if __name__ == "__main__":
         else:
             _print_(word, tweet)
     if usedb:
-        conn.disconnect()
+        db.disconnect()
+
