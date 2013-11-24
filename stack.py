@@ -37,11 +37,11 @@ if __name__ == "__main__":
             if tweets.count() > TWEET_LIMIT:
                 tweet_one = tweets[0]
                 db.remove(tweet_one)
-            db.save({
-                "id": tweet.id,
-                "word": word,
-                "text": tweet.text.encode("utf-8"),
-                })
+            db.save(
+                tweet.id,
+                word,
+                tweet.text.encode("utf-8"),
+                )
         else:
             _print_(word, tweet)
     if usedb:
